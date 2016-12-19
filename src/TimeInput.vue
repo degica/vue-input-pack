@@ -14,10 +14,9 @@
 </template>
 
 <script>
-import Vue from "vue"
 import util from "./util"
 
-export default Vue.extend({
+export default {
   name: 'TimeInput',
   props: {
     value: String
@@ -44,5 +43,5 @@ export default Vue.extend({
       this.minute = parseInt(found[2])
     }
   }
-})
+}
 </script>

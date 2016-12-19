@@ -1,12 +1,12 @@
 var path = require('path')
+var projectRoot = path.resolve(__dirname, "../")
 
 module.exports = {
   entry: {
     app: './src/demo.js'
   },
   output: {
-    path: path.resolve(__dirname, '../dist/static'),
-    publicPath: 'static/',
+    path: path.resolve(__dirname, '../dist/'),
     filename: '[name].js'
   },
   resolve: {
@@ -29,15 +29,12 @@ module.exports = {
       {
         test: /\.js$/,
         loader: 'babel',
+        include: projectRoot,
         exclude: /node_modules/
       },
       {
         test: /\.vue$/,
         loader: 'vue'
-      },
-      {
-        test: /\.json$/,
-        loader: 'json'
       },
       {
         test: /\.(png|jpg|gif|svg)$/,

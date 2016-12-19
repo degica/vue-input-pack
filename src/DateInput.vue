@@ -19,10 +19,9 @@
 </template>
 
 <script>
-import Vue from "vue"
-import moment from "moment"
+import util from "./util"
 
-export default Vue.extend({
+export default {
   name: 'DateInput',
   props: {
     value: String
@@ -44,7 +43,7 @@ export default Vue.extend({
   },
   methods: {
     updateInput(e) {
-      this.$emit('input',  moment(`${this.year}-${this.month}-${this.day}`, "YYYY-M-D").format("YYYY-MM-DD"))
+      this.$emit('input',  `${this.year}-${util.zeroFill(this.month)}-${util.zeroFill(this.day)}`)
     }
   },
   created() {
@@ -58,5 +57,5 @@ export default Vue.extend({
       this.daysInMonth = new Date(this.year, this.month, 0).getDate()
     }
   }
-})
+}
 </script>

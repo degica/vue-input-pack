@@ -2,10 +2,14 @@
   "name": "vue-input-pack",
   "version": "1.0.0",
   "description": "Collection of simple input helpers for vue.js",
-  "main": "src/index.js",
+  "main": "dist/vue-input-pack.js",
   "scripts": {
-    "dev": "webpack-dev-server --inline --hot --config build/webpack.dev.conf.js"
+    "dev": "webpack-dev-server --inline --hot --config build/webpack.dev.conf.js",
+    "build": "rimraf dist && webpack --progress --hide-modules --config build/webpack.prod.conf.js"
   },
+  "files": [
+    "src"
+  ],
   "keywords": [
     "vue",
     "date",
@@ -22,6 +26,7 @@
     "babel-preset-stage-2": "^6.18.0",
     "babel-runtime": "^6.20.0",
     "html-webpack-plugin": "^2.24.1",
+    "rimraf": "^2.5.4",
     "vue": "^2.1.6",
     "vue-loader": "^10.0.2",
     "vue-style-loader": "^1.0.0",
