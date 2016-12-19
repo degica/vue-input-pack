@@ -5,6 +5,7 @@ config.output.filename = 'vue-input-pack.js'
 config.output.library = 'VueInputPack'
 config.output.libraryTarget = 'umd'
 config.output.umdNamedDefine = true
+config.entry.app = './src/index.js'
 
 // whether to generate source map for production files.
 // disabling this can speed up the build.
