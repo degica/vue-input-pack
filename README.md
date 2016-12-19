@@ -4,8 +4,8 @@ Collection of simple input helpers for vue.js
 
 ## What's included?
 
-* Date Select
-* Time Select
+* Date Input
+* Time Input
 
 ## Screenshot
 
