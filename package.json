@@ -1,6 +1,6 @@
 {
   "name": "vue-input-pack",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Collection of simple input helpers for vue.js",
   "main": "dist/vue-input-pack.js",
   "scripts": {
