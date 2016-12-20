@@ -120,7 +120,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = {
 	  name: 'DateInput',
 	  props: {
-	    value: String
+	    value: Object // { year: 2016, month: 3, day: 17 }
 	  },
 	  data: function data() {
 	    var date = new Date();
@@ -140,17 +140,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	  methods: {
 	    updateInput: function updateInput(e) {
-	      this.$emit('input', this.year + '-' + _util2.default.zeroFill(this.month) + '-' + _util2.default.zeroFill(this.day));
+	      this.$emit('input', { year: this.year, month: this.month, day: this.day });
 	    }
 	  },
 	  created: function created() {
 	    if (this.value) {
-	      var re = /(\d*)-(\d*)-(\d*)/;
-	      var found = this.value.match(re);
-	
-	      this.year = parseInt(found[1]);
-	      this.month = parseInt(found[2]);
-	      this.day = parseInt(found[3]);
+	      this.year = this.value.year;
+	      this.month = this.value.month;
+	      this.day = this.value.day;
 	      this.daysInMonth = new Date(this.year, this.month, 0).getDate();
 	    }
 	  }
@@ -194,7 +191,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = {
 	  name: 'TimeInput',
 	  props: {
-	    value: String
+	    value: Object // { HH: 00, mm: 00 }
 	  },
 	  data: function data() {
 	    return {
@@ -205,8 +202,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	  methods: {
 	    updateInput: function updateInput(e) {
-	      var value = this.zeroFill(this.hour) + ':' + this.zeroFill(this.minute) + ':00';
-	      this.$emit('input', value);
+	      this.$emit('input', { HH: this.hour, mm: this.minute });
 	    },
 	
 	    range: _util2.default.range,
@@ -214,10 +210,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	  },
 	  created: function created() {
 	    if (this.value) {
-	      var re = /(\d\d):(\d\d):(\d\d)/;
-	      var found = this.value.match(re);
-	      this.hour = parseInt(found[1]);
-	      this.minute = parseInt(found[2]);
+	      this.hour = this.value.HH;
+	      this.minute = this.value.mm;
 	    }
 	  }
 	}; //
