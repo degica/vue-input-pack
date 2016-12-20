@@ -20,8 +20,8 @@ import { DateInput, TimeInput } from "./index"
 export default {
   data() {
     return {
-      date: "2016-01-01",
-      time: "12:30:00"
+      date: { year: 2016, month: 1, day: 1 },
+      time: { HH: 12, mm: 30 }
     }
   },
   components: { TimeInput, DateInput }

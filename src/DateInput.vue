@@ -24,7 +24,7 @@ import util from "./util"
 export default {
   name: 'DateInput',
   props: {
-    value: String
+    value: Object // { year: 2016, month: 3, day: 17 }
   },
   data() {
     let date = new Date()
@@ -43,17 +43,14 @@ export default {
   },
   methods: {
     updateInput(e) {
-      this.$emit('input',  `${this.year}-${util.zeroFill(this.month)}-${util.zeroFill(this.day)}`)
+      this.$emit('input', { year: this.year, month: this.month, day: this.day })
     }
   },
   created() {
     if (this.value) {
-      let re = /(\d*)-(\d*)-(\d*)/
-      let found = this.value.match(re)
-
-      this.year = parseInt(found[1])
-      this.month = parseInt(found[2])
-      this.day = parseInt(found[3])
+      this.year = this.value.year
+      this.month = this.value.month
+      this.day = this.value.day
       this.daysInMonth = new Date(this.year, this.month, 0).getDate()
     }
   }

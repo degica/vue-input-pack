@@ -19,7 +19,7 @@ import util from "./util"
 export default {
   name: 'TimeInput',
   props: {
-    value: String
+    value: Object // { HH: 00, mm: 00 }
   },
   data() {
     return {
@@ -29,18 +29,15 @@ export default {
   },
   methods: {
     updateInput(e) {
-      let value = `${this.zeroFill(this.hour)}:${this.zeroFill(this.minute)}:00`
-      this.$emit('input', value)
+      this.$emit('input', {HH: this.hour, mm: this.minute})
     },
     range: util.range,
     zeroFill: util.zeroFill
   },
   created() {
     if (this.value) {
-      let re = /(\d\d):(\d\d):(\d\d)/
-      let found = this.value.match(re)
-      this.hour = parseInt(found[1])
-      this.minute = parseInt(found[2])
+      this.hour = this.value.HH
+      this.minute = this.value.mm
     }
   }
 }

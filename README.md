@@ -33,6 +33,12 @@ $ npm install vue-input-pack
 import { DateInput, TimeInput } from 'vue-input-pack';
 
 export default {
+    data() {
+      return {
+        date: { year: 2016, month: 1, day: 1 },
+        time: { HH: 17, mm: 30 }
+      }
+    },
     components: { DateInput, TimeInput }
 };
 </script>
