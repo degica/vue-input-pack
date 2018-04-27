@@ -20,7 +20,7 @@ import { DateInput, TimeInput } from "./index"
 export default {
   data() {
     return {
-      date: { year: 2016, month: 1, day: 1 },
+      date: { year: 2018, month: 4, day: 28 },
       time: { HH: 12, mm: 30 }
     }
   },

@@ -52,7 +52,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /************************************************************************/
 /******/ ([
 /* 0 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
@@ -61,11 +61,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	});
 	exports.TimeInput = exports.DateInput = undefined;
 	
-	var _DateInput = __webpack_require__(4);
+	var _DateInput = __webpack_require__(5);
 	
 	var _DateInput2 = _interopRequireDefault(_DateInput);
 	
-	var _TimeInput = __webpack_require__(5);
+	var _TimeInput = __webpack_require__(6);
 	
 	var _TimeInput2 = _interopRequireDefault(_TimeInput);
 	
@@ -74,9 +74,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.DateInput = _DateInput2.default;
 	exports.TimeInput = _TimeInput2.default;
 
-/***/ },
+/***/ }),
 /* 1 */
-/***/ function(module, exports) {
+/***/ (function(module, exports) {
 
 	"use strict";
 	
@@ -101,9 +101,62 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }
 	};
 
-/***/ },
+/***/ }),
 /* 2 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports) {
+
+	module.exports = function normalizeComponent (
+	  rawScriptExports,
+	  compiledTemplate,
+	  scopeId,
+	  cssModules
+	) {
+	  var esModule
+	  var scriptExports = rawScriptExports = rawScriptExports || {}
+	
+	  // ES6 modules interop
+	  var type = typeof rawScriptExports.default
+	  if (type === 'object' || type === 'function') {
+	    esModule = rawScriptExports
+	    scriptExports = rawScriptExports.default
+	  }
+	
+	  // Vue.extend constructor export interop
+	  var options = typeof scriptExports === 'function'
+	    ? scriptExports.options
+	    : scriptExports
+	
+	  // render functions
+	  if (compiledTemplate) {
+	    options.render = compiledTemplate.render
+	    options.staticRenderFns = compiledTemplate.staticRenderFns
+	  }
+	
+	  // scopedId
+	  if (scopeId) {
+	    options._scopeId = scopeId
+	  }
+	
+	  // inject cssModules
+	  if (cssModules) {
+	    var computed = options.computed || (options.computed = {})
+	    Object.keys(cssModules).forEach(function (key) {
+	      var module = cssModules[key]
+	      computed[key] = function () { return module }
+	    })
+	  }
+	
+	  return {
+	    esModule: esModule,
+	    exports: scriptExports,
+	    options: options
+	  }
+	}
+
+
+/***/ }),
+/* 3 */
+/***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
@@ -127,14 +180,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	    var year = date.getFullYear();
 	    var month = date.getMonth() + 1;
 	    var day = date.getDate();
-	    var daysInMonth = new Date(year, month, 0).getDate();
 	
 	    return {
 	      year: year,
 	      years: [year, year + 1],
 	      month: month,
-	      day: day,
-	      daysInMonth: daysInMonth
+	      day: day
 	    };
 	  },
 	
@@ -143,12 +194,16 @@ return /******/ (function(modules) { // webpackBootstrap
 	      this.$emit('input', { year: this.year, month: this.month, day: this.day });
 	    }
 	  },
+	  computed: {
+	    daysInMonth: function daysInMonth() {
+	      return new Date(this.year, this.month, 0).getDate();
+	    }
+	  },
 	  created: function created() {
 	    if (this.value) {
 	      this.year = this.value.year;
 	      this.month = this.value.month;
 	      this.day = this.value.day;
-	      this.daysInMonth = new Date(this.year, this.month, 0).getDate();
 	    }
 	  }
 	}; //
@@ -172,9 +227,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	//
 	//
 
-/***/ },
-/* 3 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ }),
+/* 4 */
+/***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
@@ -230,76 +285,23 @@ return /******/ (function(modules) { // webpackBootstrap
 	//
 	//
 
-/***/ },
-/* 4 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var __vue_exports__, __vue_options__
-	var __vue_styles__ = {}
-	
-	/* script */
-	__vue_exports__ = __webpack_require__(2)
-	
-	/* template */
-	var __vue_template__ = __webpack_require__(7)
-	__vue_options__ = __vue_exports__ = __vue_exports__ || {}
-	if (
-	  typeof __vue_exports__.default === "object" ||
-	  typeof __vue_exports__.default === "function"
-	) {
-	if (Object.keys(__vue_exports__).some(function (key) { return key !== "default" && key !== "__esModule" })) {console.error("named exports are not supported in *.vue files.")}
-	__vue_options__ = __vue_exports__ = __vue_exports__.default
-	}
-	if (typeof __vue_options__ === "function") {
-	  __vue_options__ = __vue_options__.options
-	}
-	__vue_options__.__file = "/Users/richardramsden/Projects/Degica/vue-input-pack/src/DateInput.vue"
-	__vue_options__.render = __vue_template__.render
-	__vue_options__.staticRenderFns = __vue_template__.staticRenderFns
-	
-	/* hot reload */
-	if (false) {(function () {
-	  var hotAPI = require("vue-hot-reload-api")
-	  hotAPI.install(require("vue"), false)
-	  if (!hotAPI.compatible) return
-	  module.hot.accept()
-	  if (!module.hot.data) {
-	    hotAPI.createRecord("data-v-febff438", __vue_options__)
-	  } else {
-	    hotAPI.reload("data-v-febff438", __vue_options__)
-	  }
-	})()}
-	if (__vue_options__.functional) {console.error("[vue-loader] DateInput.vue: functional components are not supported and should be defined in plain js files using render functions.")}
-	
-	module.exports = __vue_exports__
-
-
-/***/ },
+/***/ }),
 /* 5 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
-	var __vue_exports__, __vue_options__
-	var __vue_styles__ = {}
-	
-	/* script */
-	__vue_exports__ = __webpack_require__(3)
-	
-	/* template */
-	var __vue_template__ = __webpack_require__(6)
-	__vue_options__ = __vue_exports__ = __vue_exports__ || {}
-	if (
-	  typeof __vue_exports__.default === "object" ||
-	  typeof __vue_exports__.default === "function"
-	) {
-	if (Object.keys(__vue_exports__).some(function (key) { return key !== "default" && key !== "__esModule" })) {console.error("named exports are not supported in *.vue files.")}
-	__vue_options__ = __vue_exports__ = __vue_exports__.default
-	}
-	if (typeof __vue_options__ === "function") {
-	  __vue_options__ = __vue_options__.options
-	}
-	__vue_options__.__file = "/Users/richardramsden/Projects/Degica/vue-input-pack/src/TimeInput.vue"
-	__vue_options__.render = __vue_template__.render
-	__vue_options__.staticRenderFns = __vue_template__.staticRenderFns
+	var Component = __webpack_require__(2)(
+	  /* script */
+	  __webpack_require__(3),
+	  /* template */
+	  __webpack_require__(8),
+	  /* scopeId */
+	  null,
+	  /* cssModules */
+	  null
+	)
+	Component.options.__file = "/Users/rramsden/Degica/vue-input-pack/src/DateInput.vue"
+	if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
+	if (Component.options.functional) {console.error("[vue-loader] DateInput.vue: functional components are not supported with templates, they should use render functions.")}
 	
 	/* hot reload */
 	if (false) {(function () {
@@ -308,21 +310,54 @@ return /******/ (function(modules) { // webpackBootstrap
 	  if (!hotAPI.compatible) return
 	  module.hot.accept()
 	  if (!module.hot.data) {
-	    hotAPI.createRecord("data-v-d7c694b6", __vue_options__)
+	    hotAPI.createRecord("data-v-e49963da", Component.options)
 	  } else {
-	    hotAPI.reload("data-v-d7c694b6", __vue_options__)
+	    hotAPI.reload("data-v-e49963da", Component.options)
 	  }
 	})()}
-	if (__vue_options__.functional) {console.error("[vue-loader] TimeInput.vue: functional components are not supported and should be defined in plain js files using render functions.")}
 	
-	module.exports = __vue_exports__
+	module.exports = Component.exports
 
 
-/***/ },
+/***/ }),
 /* 6 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
-	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._c;
+	var Component = __webpack_require__(2)(
+	  /* script */
+	  __webpack_require__(4),
+	  /* template */
+	  __webpack_require__(7),
+	  /* scopeId */
+	  null,
+	  /* cssModules */
+	  null
+	)
+	Component.options.__file = "/Users/rramsden/Degica/vue-input-pack/src/TimeInput.vue"
+	if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
+	if (Component.options.functional) {console.error("[vue-loader] TimeInput.vue: functional components are not supported with templates, they should use render functions.")}
+	
+	/* hot reload */
+	if (false) {(function () {
+	  var hotAPI = require("vue-hot-reload-api")
+	  hotAPI.install(require("vue"), false)
+	  if (!hotAPI.compatible) return
+	  module.hot.accept()
+	  if (!module.hot.data) {
+	    hotAPI.createRecord("data-v-bda00458", Component.options)
+	  } else {
+	    hotAPI.reload("data-v-bda00458", Component.options)
+	  }
+	})()}
+	
+	module.exports = Component.exports
+
+
+/***/ }),
+/* 7 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
 	  return _c('div', {
 	    staticClass: "input time"
 	  }, [_c('select', {
@@ -335,12 +370,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	    staticClass: "time",
 	    on: {
 	      "change": [function($event) {
-	        _vm.hour = Array.prototype.filter.call($event.target.options, function(o) {
+	        var $$selectedVal = Array.prototype.filter.call($event.target.options, function(o) {
 	          return o.selected
 	        }).map(function(o) {
 	          var val = "_value" in o ? o._value : o.value;
 	          return val
-	        })[0]
+	        });
+	        _vm.hour = $event.target.multiple ? $$selectedVal : $$selectedVal[0]
 	      }, _vm.updateInput]
 	    }
 	  }, _vm._l((_vm.range(0, 23)), function(n) {
@@ -359,12 +395,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	    staticClass: "time",
 	    on: {
 	      "change": [function($event) {
-	        _vm.minute = Array.prototype.filter.call($event.target.options, function(o) {
+	        var $$selectedVal = Array.prototype.filter.call($event.target.options, function(o) {
 	          return o.selected
 	        }).map(function(o) {
 	          var val = "_value" in o ? o._value : o.value;
 	          return val
-	        })[0]
+	        });
+	        _vm.minute = $event.target.multiple ? $$selectedVal : $$selectedVal[0]
 	      }, _vm.updateInput]
 	    }
 	  }, _vm._l((_vm.range(0, 59)), function(n) {
@@ -379,15 +416,15 @@ return /******/ (function(modules) { // webpackBootstrap
 	if (false) {
 	  module.hot.accept()
 	  if (module.hot.data) {
-	     require("vue-hot-reload-api").rerender("data-v-d7c694b6", module.exports)
+	     require("vue-hot-reload-api").rerender("data-v-bda00458", module.exports)
 	  }
 	}
 
-/***/ },
-/* 7 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ }),
+/* 8 */
+/***/ (function(module, exports, __webpack_require__) {
 
-	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._c;
+	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
 	  return _c('div', {
 	    staticClass: "input date"
 	  }, [_c('select', {
@@ -400,12 +437,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	    staticClass: "date",
 	    on: {
 	      "change": [function($event) {
-	        _vm.year = Array.prototype.filter.call($event.target.options, function(o) {
+	        var $$selectedVal = Array.prototype.filter.call($event.target.options, function(o) {
 	          return o.selected
 	        }).map(function(o) {
 	          var val = "_value" in o ? o._value : o.value;
 	          return val
-	        })[0]
+	        });
+	        _vm.year = $event.target.multiple ? $$selectedVal : $$selectedVal[0]
 	      }, _vm.updateInput]
 	    }
 	  }, _vm._l((_vm.years), function(year) {
@@ -420,12 +458,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	    staticClass: "date",
 	    on: {
 	      "change": [function($event) {
-	        _vm.month = Array.prototype.filter.call($event.target.options, function(o) {
+	        var $$selectedVal = Array.prototype.filter.call($event.target.options, function(o) {
 	          return o.selected
 	        }).map(function(o) {
 	          var val = "_value" in o ? o._value : o.value;
 	          return val
-	        })[0]
+	        });
+	        _vm.month = $event.target.multiple ? $$selectedVal : $$selectedVal[0]
 	      }, _vm.updateInput]
 	    }
 	  }, _vm._l((12), function(n) {
@@ -440,12 +479,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	    staticClass: "date",
 	    on: {
 	      "change": [function($event) {
-	        _vm.day = Array.prototype.filter.call($event.target.options, function(o) {
+	        var $$selectedVal = Array.prototype.filter.call($event.target.options, function(o) {
 	          return o.selected
 	        }).map(function(o) {
 	          var val = "_value" in o ? o._value : o.value;
 	          return val
-	        })[0]
+	        });
+	        _vm.day = $event.target.multiple ? $$selectedVal : $$selectedVal[0]
 	      }, _vm.updateInput]
 	    }
 	  }, _vm._l((_vm.daysInMonth), function(n) {
@@ -456,11 +496,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	if (false) {
 	  module.hot.accept()
 	  if (module.hot.data) {
-	     require("vue-hot-reload-api").rerender("data-v-febff438", module.exports)
+	     require("vue-hot-reload-api").rerender("data-v-e49963da", module.exports)
 	  }
 	}
 
-/***/ }
+/***/ })
 /******/ ])
 });
 ;

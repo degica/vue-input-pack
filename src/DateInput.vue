@@ -31,14 +31,12 @@ export default {
     let year = date.getFullYear()
     let month = date.getMonth() + 1
     let day = date.getDate()
-    let daysInMonth = new Date(year, month, 0).getDate()
 
     return {
       year: year,
       years: [year, year + 1],
       month: month,
-      day: day,
-      daysInMonth: daysInMonth
+      day: day
     }
   },
   methods: {
@@ -46,12 +44,16 @@ export default {
       this.$emit('input', { year: this.year, month: this.month, day: this.day })
     }
   },
+  computed: {
+    daysInMonth() {
+      return new Date(this.year, this.month, 0).getDate()
+    }
+  },
   created() {
     if (this.value) {
       this.year = this.value.year
       this.month = this.value.month
       this.day = this.value.day
-      this.daysInMonth = new Date(this.year, this.month, 0).getDate()
     }
   }
 }
